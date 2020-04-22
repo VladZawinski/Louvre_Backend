@@ -43,7 +43,7 @@ const unsplash = (document) => {
 }
 
 function createUrlWithPage(page){
-     return `${url}&page=${page}`
+     return `${url}&page=${page}&order_by=popular`
 }
 
 module.exports = fetchUnsplash
