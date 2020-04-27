@@ -8,7 +8,7 @@ const pixabay = require('./modules/pixabay');
 
 //   Pixabay
 
-app.get('/api/pixabay/:page', (req, res) => {
+app.get('/api/v1/pixabay/:page', (req, res) => {
      let page = req.params.page;
      let category = req.query.category;
      let color = req.query.color;
@@ -22,10 +22,10 @@ app.get('/api/pixabay/:page', (req, res) => {
 });
 
 //  Unsplash
-app.get('/api/unsplash/:page', (req, res) => {
-     let page = req.params.page;
+app.get('/api/v1/unsplash/photos/', (req, res) => {
+     let page = req.query.page || 1
 
-     unsplash(req.params.page)
+     unsplash.fetchPopularPhotos(page)
           .then(body => {
                res.send({
                     current_page : page,
@@ -35,13 +35,30 @@ app.get('/api/unsplash/:page', (req, res) => {
           .catch(e => res.status(404).send(e))
 });
 
-app.get('/api/search', (req, res) => {
+app.get('/api/v1/unsplash/collections', (req, res) => {
+     let page = req.query.page || 1;
+
+     unsplash.getAllCollections(page)
+          .then(result => {
+               res.send(result);
+          }).catch(e => res.send(e));
+});
+
+
+
+app.get('/api/v1/search', (req, res) => {
      const query = req.query.q;
 
-     
      pixabay.search(query)
      .then(result => res.send(result))
      .catch(e => res.status(404).send(e))
+});
+
+
+app.get('*', (req, res) => {
+     res.status(404).send({
+          message: "Get the fuck out of here"
+     });
 });
 
 
