@@ -42,7 +42,10 @@ app.get('/api/v1/unsplash/collections', (req, res) => {
 
      unsplash.getAllCollections(page)
           .then(result => {
-               res.send(result);
+               res.send({
+                    page : page,
+                    collections : result
+               });
           }).catch(e => res.send(e));
 });
 
