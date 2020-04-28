@@ -66,7 +66,8 @@ const Collection = (document) => {
                profile_image : document.user.profile_image.large,
                instagram_username : document.user.instagram_username,
                total_likes : document.user.total_likes,
-               total_photos : document.user.total_photos
+               total_photos : document.user.total_photos,
+               total_collections: document.user.total_collections
           },
           preview_photos : document.preview_photos
 
