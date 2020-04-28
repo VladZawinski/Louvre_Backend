@@ -74,7 +74,7 @@ function Pexels(result) {
                likes : 0,
                img :{
                     high : document.src.portrait,
-                    low: document.src.large2z
+                    low: document.src.large2x
                },
                user: {
                     id : document.photographer.id,
