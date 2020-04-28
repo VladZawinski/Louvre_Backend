@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
+const pexels = require('./modules/Pexels');
 
 const port = process.env.PORT || 1337
 
 const unsplash = require('./modules/unsplash');
 const pixabay = require('./modules/pixabay');
+const Pexels = new pexels()
 
 //   Pixabay
 
@@ -45,13 +47,16 @@ app.get('/api/v1/unsplash/collections', (req, res) => {
 });
 
 
-
 app.get('/api/v1/search', (req, res) => {
      const query = req.query.q;
+     const page = req.query.page;
 
-     pixabay.search(query)
-     .then(result => res.send(result))
-     .catch(e => res.status(404).send(e))
+     Pexels.search(query,10,page)
+          .then(result => {
+               res.send(result);
+          })
+          .catch(e => console.error(e))
+
 });
 
 
