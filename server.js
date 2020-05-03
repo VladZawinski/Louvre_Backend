@@ -49,6 +49,15 @@ app.get('/api/v1/unsplash/collections', (req, res) => {
           }).catch(e => res.send(e));
 });
 
+app.get('/api/v1/unsplash/collections/:id', (req, res) => {
+     const page = req.query.page
+     const id = req.params.id
+
+     unsplash.getPhotosOfCollection(id,page)
+          .then(result => res.status(200).send(result))
+          .catch(e => res.status(404).send(e))
+});
+
 
 app.get('/api/v1/search', (req, res) => {
      const query = req.query.q;

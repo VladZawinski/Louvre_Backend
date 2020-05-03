@@ -43,6 +43,23 @@ const getAllCollections = (page) => {
      })
 }
 
+const getPhotosOfCollection = (id,page) => {
+     
+     return new Promise((resolve,reject) => {
+          fetch(createPhotosByCollectionUrl(id,page))
+               .then(res =>  res.json())
+               .then(body => {
+                    const result = [];
+                    
+                    body.forEach(document => {
+                         result.push(Unsplash(document))
+                    })
+
+                    resolve(result)
+               }).catch(e => reject(e))
+     })
+}
+
 const Collection = (document) => {
      return { 
           id : document.id,
@@ -112,7 +129,12 @@ function createUrlWithPage(page){
      return `${base_url}/photos?client_id=${API_KEY}&page=${page}&order_by=popular`
 }
 
+function createPhotosByCollectionUrl(id,page){
+     return `${base_url}/collections/${id}/photos?client_id=${API_KEY}&page=${page}`
+}
+
 module.exports = {
      fetchPopularPhotos,
-     getAllCollections
+     getAllCollections,
+     getPhotosOfCollection
 }
