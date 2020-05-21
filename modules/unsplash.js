@@ -7,10 +7,10 @@ fetch.Promise = Bluebird;
 
 const base_url = `https://api.unsplash.com`
 
-const fetchPopularPhotos = (page) => {
+const fetchPhotos = (page,orderBy) => {
      return new Promise((resolve,reject) => {
-          let url = createUrlWithPage(page)
-
+          let url = `${createUrlWithPage(page)}&order_by=${orderBy}`
+          console.log(url);
           fetch(url).then(res =>  res.json())
                     .then(body => {
                          
@@ -126,7 +126,7 @@ function createCollectionsUrl(page) {
 }
 
 function createUrlWithPage(page){
-     return `${base_url}/photos?client_id=${API_KEY}&page=${page}&order_by=popular`
+     return `${base_url}/photos?client_id=${API_KEY}&page=${page}`
 }
 
 function createPhotosByCollectionUrl(id,page){
@@ -134,7 +134,7 @@ function createPhotosByCollectionUrl(id,page){
 }
 
 module.exports = {
-     fetchPopularPhotos,
+     fetchPhotos,
      getAllCollections,
      getPhotosOfCollection
 }

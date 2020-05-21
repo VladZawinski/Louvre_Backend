@@ -26,8 +26,10 @@ app.get('/api/v1/pixabay/:page', (req, res) => {
 //  Unsplash
 app.get('/api/v1/unsplash/photos/', (req, res) => {
      let page = req.query.page || 1
+     let orderBy = req.query.order_by || "popular"
 
-     unsplash.fetchPopularPhotos(page)
+     
+     unsplash.fetchPhotos(page,orderBy)
           .then(body => {
                res.send({
                     current_page : page,
