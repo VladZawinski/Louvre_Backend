@@ -77,7 +77,7 @@ function Pexels(result) {
                     low: document.src.large2x
                },
                user: {
-                    id : document.photographer.id,
+                    id : "PexelsId",
                     name : document.photographer,
                     username: "",
                     twitter_username : "@pexels",
