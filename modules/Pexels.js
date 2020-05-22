@@ -63,7 +63,7 @@ function Pexels(result) {
 
      result.photos.forEach(document => {
           modified.push({
-               original_id : document.id,
+               original_id : document.id.toString(),
                width : document.width,
                height : document.height,
                description : "No description",
