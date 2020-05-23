@@ -44,6 +44,7 @@ const getAllCollections = (page) => {
 }
 
 const getPhotosOfCollection = (id,page) => {
+     console.log(createPhotosByCollectionUrl(id,page));
      
      return new Promise((resolve,reject) => {
           fetch(createPhotosByCollectionUrl(id,page))
@@ -55,7 +56,10 @@ const getPhotosOfCollection = (id,page) => {
                          result.push(Unsplash(document))
                     })
 
-                    resolve(result)
+                    resolve({
+                         page: page,
+                         photos: result
+                    })
                }).catch(e => reject(e))
      })
 }
